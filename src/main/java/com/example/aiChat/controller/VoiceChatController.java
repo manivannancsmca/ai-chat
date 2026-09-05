@@ -27,6 +27,7 @@ public class VoiceChatController {
      * Returns JSON metadata including base64 audio for simplicity.
      * (Binary-only response can be added later if preferred.)
      */
+    
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<VoiceChatResponse> voiceChat(
             @RequestPart("audio") MultipartFile audio,
@@ -35,4 +36,5 @@ public class VoiceChatController {
         VoiceChatResponse response = voiceChatService.process(audio, conversationId);
         return ResponseEntity.ok(response);
     }
+    
 }
