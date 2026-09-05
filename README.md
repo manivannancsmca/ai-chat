@@ -98,3 +98,11 @@ docker run -d \
   -v ollama_data:/root/.ollama \
   --restart unless-stopped \
   ollama/ollama
+
+
+docker run -d --name ollama -p 11434:11434 -v ollama_data:/root/.ollama ollama/ollama
+docker exec -it ollama ollama pull llama3.2
+
+# Terminal 2 — App
+cd /path/to/ai-chat
+mvn clean spring-boot:run
