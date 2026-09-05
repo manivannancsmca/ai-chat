@@ -1,0 +1,32 @@
+### Chat
+POST http://localhost:8080/api/v1/chat
+Content-Type: application/json
+
+{
+  "message": "Explain microservices in simple terms"
+}
+
+
+### Streaming (SSE)
+POST http://localhost:8080/api/v1/chat/stream
+Content-Type: application/json
+
+{
+  "message": "Write a short poem"
+}
+
+
+### Voice chat
+POST http://localhost:8080/api/v1/voice-chat
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+------WebKitFormBoundary
+Content-Disposition: form-data; name="audio"; filename="recording.wav"
+Content-Type: audio/wav
+
+< ./recording.wav
+------WebKitFormBoundary
+Content-Disposition: form-data; name="conversationId"
+
+optional-id
+------WebKitFormBoundary--

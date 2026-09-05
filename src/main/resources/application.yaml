@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: ai-chat
+  servlet:
+    multipart:
+      max-file-size: ${MAX_UPLOAD_SIZE:10MB}
+      max-request-size: ${MAX_UPLOAD_SIZE:12MB}
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_MODEL:llama3.2:latest}
+          temperature: ${OLLAMA_TEMPERATURE:0.7}
+          num-ctx: ${OLLAMA_NUM_CTX:4096}
+          num-predict: ${OLLAMA_NUM_PREDICT:1024}
+      init:
+        pull-model-strategy: ${OLLAMA_PULL_STRATEGY:when_missing}  # never | when_missing | always
+        timeout: 10m
+        max-retries: 2
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+
+app:
+  ai:
+    system-prompt: ${AI_SYSTEM_PROMPT:You are a helpful, concise assistant.}
+    max-message-length: ${AI_MAX_MESSAGE_LENGTH:10000}
+    max-history-messages: ${AI_MAX_HISTORY:50}
+  conversation:
+    max-messages-per-conversation: 100
+  voice:
+    provider: local
+    supported-audio-types:
+      - audio/wav
+      - audio/wave
+      - audio/x-wav
+      - audio/mpeg
+      - audio/mp3
+      - audio/ogg
+      - audio/webm
+    max-audio-size-bytes: 10485760  # 10 MB
+    stt:
+      # Local stub / future Whisper integration
+      language: en
+    tts:
+      # Local stub / future Piper / espeak integration
+      voice: default
+      sample-rate: 22050
+
+logging:
+  level:
+    root: INFO
+    com.example.aichat: INFO
+    org.springframework.ai: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
