@@ -82,4 +82,5 @@ public class ChatService {
                     "Message exceeds maximum length of " + aiProperties.maxMessageLength());
         }
     }
+    
 }
