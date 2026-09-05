@@ -61,8 +61,10 @@ public class ConversationService {
 
     private void trimIfNeeded(Conversation conversation) {
         int max = aiProperties.maxHistoryMessages();
+        
         // Simple trim: keep only the most recent messages by rebuilding if oversized.
         // For a richer policy you could drop oldest non-system messages.
+        
         if (conversation.size() > max * 2) {
             List<ConversationMessage> recent = conversation.getRecentMessages(max);
             Conversation trimmed = Conversation.create(conversation.getId());
@@ -70,4 +72,5 @@ public class ConversationService {
             conversationRepository.save(trimmed);
         }
     }
+    
 }
