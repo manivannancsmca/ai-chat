@@ -99,7 +99,16 @@ docker run -d \
   --restart unless-stopped \
   ollama/ollama
 
+---
 
+Chat fails / connection errors
+Confirm Ollama: curl http://localhost:11434/api/tags
+
+Confirm model: ollama list or docker exec -it ollama ollama list
+
+If app is on host, base URL must be http://localhost:11434
+
+If app is in Compose, base URL must be http://ollama:11434
 docker run -d --name ollama -p 11434:11434 -v ollama_data:/root/.ollama ollama/ollama
 docker exec -it ollama ollama pull llama3.2
 
