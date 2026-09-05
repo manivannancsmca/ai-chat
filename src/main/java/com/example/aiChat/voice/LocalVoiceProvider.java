@@ -55,4 +55,5 @@ public class LocalVoiceProvider implements SpeechToTextProvider, TextToSpeechPro
         String marker = "AI-TTS:" + text.substring(0, Math.min(50, text.length()));
         return marker.getBytes(StandardCharsets.UTF_8);
     }
+    
 }
